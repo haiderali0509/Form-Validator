@@ -15,8 +15,38 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
     // console.log("Form submitted ✅");
     validateForm();
-});
+    
+  // if (
+  //   usernameValid.innerText === "" &&
+  //   emailValid.innerText === "" &&
+  //   passwordError.innerText === "" &&
+  //   confirmPasswordError.innerText === ""
+  // ) {
+  //   alert("Form submitted successfully");
+  //   form.reset();
+  // }
 
+  // other way to check if all the fields are valid
+  let errorFields = [usernameValid.innerText, emailValid.innerText, passwordError.innerText, confirmPasswordError.innerText];
+  // errorFields.forEach((error) => {
+  //   if (error !== "") {
+  //     alert("Form submitted successfully");
+  //   }
+    // });
+    
+    // third way to check if all the fields are valid
+    let isValid = errorFields.every((error) => error.innerText === "");
+    if (isValid) {
+      alert("Form submitted!");
+        form.reset();
+        resetErrorMessages();
+    }
+});
+resetErrorMessages = () => {
+    errorFields.forEach((error) => {
+        error.innerText = "";
+    });
+}
 function validateForm() {
   const usernameValue = username.value.trim();
   const emailValue = email.value.trim();
@@ -59,3 +89,4 @@ function validateForm() {
     confirmPasswordError.innerText = "";
   }
 }
+
